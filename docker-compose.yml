@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  registry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REGISTRY_IMAGE_VERSION: $REGISTRY_IMAGE_VERSION
+    container_name: registry
+    restart: always
+    ports:
+      - "5000:5000"
+      - "5443:443"
+    volumes:
+      - ./certs:/certs
+      - ./data/registry:/var/lib/registry
+      - ./config/registry-config-2.8.3.yml:/etc/docker/registry/config.yml
+#      - ./config/registry-config.yml:/etc/distribution/config.yml
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:443
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/dockerdoamin.crt
+      - REGISTRY_HTTP_TLS_KEY=/certs/dockerdoamin.key
+      - REGISTRY_STORAGE_DELETE_ENABLED=true

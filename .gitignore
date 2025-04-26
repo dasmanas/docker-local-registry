@@ -1,0 +1,9 @@
+### Data directory mounted for registry ###
+.data
+### IntelliJ IDEA ###
+.idea
+### Trust Keypair and Registry Keypair ###
+certs/*
+!certs/.gitkeep
+data/registry/*
+!data/registry/.gitkeep
