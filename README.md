@@ -53,11 +53,13 @@ openssl x509 \
 -extensions v3_req
 ```
 
-Make sure all your Private Keys are safe and secure.
+**Make sure all your Private Keys are safe and secure.**
 
 ## Docker Engine configuration configuration
 
-### No TLS/HTTPS config
+You can choose to run on TLS or without TLS. Depending upon your choice pick your option from below.
+
+### Without TLS/HTTPS config
 For this, you have to mention `insecure-registries` key in the config.
 ```json
 {
@@ -92,4 +94,22 @@ For this, you have to mention `insecure-registries` key in the config.
     "https://myregistry.dockerdomain.com:443"
   ]
 }
+```
+
+Once the configuration is updated, Apply & Restart Docker.
+
+## Machine Host Entry
+Put a proper Host Entry accordingly into `/etc/hosts` file. For example
+```
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+255.255.255.255 broadcasthost
+::1             localhost
+127.0.0.1       myregistry.dockerdomain.com
+127.0.0.1       docker.localhost
 ```
